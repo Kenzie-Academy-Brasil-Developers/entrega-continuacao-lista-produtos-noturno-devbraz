@@ -53,20 +53,19 @@ function montarListaProdutos(listaProdutos) {
             const h3 = document.createElement('h3');
             const p = document.createElement('p');
             const span = document.createElement('span');
-
     
             img.src = produtos[counter].img;
             img.alt = produtos[counter].nome;
             h3.innerText = produtos[counter].nome;
-            p.innerText = produtos[counter].preco;
+            if(produtos[counter].promocao) {
+                p.innerText = produtos[counter].precoPromocao;
+                somaCarrinho += parseFloat(produtos[counter].precoPromocao)
+            } else {
+                p.innerText = produtos[counter].preco;
+                somaCarrinho += parseFloat(produtos[counter].preco)
+            }
             span.innerText = produtos[counter].secao;
             
-            if(produtos[counter].promocao) {
-                somaCarrinho += parseInt(produtos[counter].precoPromocao)
-            } else {
-                somaCarrinho += parseInt(produtos[counter].preco)
-            }
-
             li.appendChild(img);
             li.appendChild(h3);
             li.appendChild(p);
@@ -118,15 +117,21 @@ botaoMostrarHortifruti.addEventListener('click', filtrarPorHortifruti);
 
 
 
-const botaoBuscar = document.querySelector('.estiloGeralBotoes--botaoBuscaPorNome');
-botaoBuscar.addEventListener('click', ()=>{
+const botaoBuscarNome = document.querySelector('.estiloGeralBotoes--botaoBuscaPorNome');
+botaoBuscarNome.addEventListener('click', ()=>{
 
     let input = document.querySelector('.campoBuscaPorNome')
-    let item = produtos.filter((produto) => { 
+    let itemNome = produtos.filter((produto) => { 
        return produto.nome.toLowerCase() === input.value.toLowerCase()
     })
+    let itemSecao = produtos.filter((produto) => { 
+        return produto.secao.toLowerCase() === input.value.toLowerCase()
+    })
+    let itemCategoria = produtos.filter((produto) => { 
+        return produto.categoria.toLowerCase() === input.value.toLowerCase()
+    })
     ul.innerHTML = ''
-    montarListaProdutos(item)
-
+    montarListaProdutos(itemNome)
+    montarListaProdutos(itemSecao)
+    montarListaProdutos(itemCategoria)
 });
-
