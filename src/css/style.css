@@ -71,7 +71,7 @@ main{
 .containerListaProdutos ul li:not(ol li) {
     color: black;
     font-weight: bold;
-    padding: 20px;
+    padding: 20px 10px 20px 10px;
     margin: 10px;
     border-radius: 5px;
     transition: ease-in-out .1s;
@@ -165,4 +165,4 @@ main{
 
 .containerCarrinho li ol{
     display: none;
-}
+} 
